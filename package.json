@@ -1,0 +1,25 @@
+{
+  "name": "scrabble-solver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc src/*.ts && node src/index.js",
+    "test": "tsc test/src/*.ts && jest test",
+    "buildTest": "tsc test/src/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonkledge/scrabble-solver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wonkledge/scrabble-solver/issues"
+  },
+  "homepage": "https://github.com/wonkledge/scrabble-solver#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "jest": "^26.0.1"
+  }
+}
