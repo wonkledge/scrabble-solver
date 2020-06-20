@@ -19,8 +19,14 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 };
 exports.__esModule = true;
 exports.findWord = exports.compare = exports.wordDataFactory = void 0;
+var letterValues = {
+    a: 1, b: 3, c: 3, d: 2, e: 1, f: 4, g: 2, h: 4, i: 1, j: 8, k: 10, l: 1, m: 2, n: 1, o: 1, p: 3, q: 8, r: 1, s: 1, t: 1, u: 1, v: 4, w: 10, x: 10, y: 10, z: 10
+};
+var countValue = function (word) { return word.split('').reduce(function (value, letter) {
+    return value + letterValues[letter];
+}, 0); };
 exports.wordDataFactory = function (value) {
-    var word = { value: value, composition: {} };
+    var word = { value: value, composition: {}, points: countValue(value) };
     return value.split('').reduce(function (wordData, letter) {
         var _a, _b;
         if (wordData.composition[letter])
@@ -41,5 +47,5 @@ exports.findWord = function (dico, scrabbleHand) {
             return __spreadArrays(wordsData, [w]);
         }
         return wordsData;
-    }, []).map(function (word) { return word.value; });
+    }, []).map(function (word) { return ({ value: word.value, points: word.points }); });
 };

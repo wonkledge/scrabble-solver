@@ -27,11 +27,20 @@ export type WordData = {
         x?: number,
         y?: number,
         z?: number
-    }
+    },
+    points: number
 };
 
+const letterValues: any = {
+    a: 1, b: 3, c:3, d:2, e:1, f:4, g:2, h:4, i:1, j:8, k:10, l:1, m:2, n:1, o:1, p:3, q:8, r:1, s:1, t:1, u:1, v:4, w:10, x:10, y:10, z:10
+}
+
+const countValue = (word: string): number => word.split('').reduce( (value: number, letter: string): number => {
+    return value + letterValues[letter];
+}, 0)
+
 export const wordDataFactory = (value: string): WordData => {
-    let word: WordData = {value, composition: {}};
+    let word: WordData = {value, composition: {}, points: countValue(value)};
 
     return value.split('').reduce((wordData: WordData , letter: string): WordData => {
         if (wordData.composition[letter])
@@ -47,7 +56,7 @@ export const compare = (scrabbleHand: WordData, wordTest: WordData) : boolean =>
     }, true);
 }
 
-export const findWord = (dico: string[], scrabbleHand: string): string[] => {
+export const findWord = (dico: string[], scrabbleHand: string): Object[] => {
     const sh = wordDataFactory(scrabbleHand);
 
     return dico.reduce( (wordsData: WordData[], word: string): WordData[] => {
@@ -57,5 +66,5 @@ export const findWord = (dico: string[], scrabbleHand: string): string[] => {
         }
 
         return wordsData;
-    }, []).map(word => word.value);
+    }, []).map(word => ({value: word.value, points: word.points}));
 };
